@@ -1,12 +1,15 @@
 const express = require('express');
 const path = require('path');
-
 const app = express();
-const port = 8080;
 
-// Serve static files from the "public" folder
+// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+const PORT = process.env.PORT || 80;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
